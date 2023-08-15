@@ -1,0 +1,25 @@
+name: Production Test
+
+on:
+  push:
+    branches:
+      - production
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: running on nodejs ${{matrix.node-version}}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
+      - name: install package
+        run: yarn install
+      - name: run testing
+        run: yarn run test
+      - name: build code
+        run: yarn run build

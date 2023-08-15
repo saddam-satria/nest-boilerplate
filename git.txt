@@ -1,0 +1,14 @@
+git checkout -b <branch_name> #checkout branch and create if not exist
+git log --oneline #commit logs
+git branch -d <branch_name> #delete branch after merge
+git branch -D <branch_name> #delete branch even if not merge 
+git push --delete origin <branch_name> #push deleted branch to repo
+git commit -m <message> #commit and give message 
+git commit #commit and open editor to edit the message 
+git branch -a #list all branch 
+git merge <branch_name> #merge repo
+git status #active branch 
+git add <folder> #add to stagging
+git add . #add all changed to stagging
+git push origin <branch_name> #push to repo
+
