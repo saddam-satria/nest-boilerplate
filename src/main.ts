@@ -1,12 +1,15 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { config } from 'dotenv';
+import { AllowedIP, PORT } from './config/constant';
+import AppModule from './modules/AppModule';
 
 (async () => {
   config({
     path: '.env',
   });
-  const PORT = process.env.PORT || 5000;
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
+  app.enableCors({
+    origin: AllowedIP,
+  });
   await app.listen(PORT);
 })();
