@@ -9,13 +9,17 @@ import { STATIC_ASSETS } from 'src/config/constant';
 @Module({
   controllers: [AppController],
   providers: [AppService],
-  imports: [JwtModule, AuthenticationModule, ServeStaticModule.forRoot({
-    rootPath: STATIC_ASSETS,
-    serveRoot: '/assets',
-    serveStaticOptions: {
-      cacheControl: true,
-    },
-  })],
+  imports: [
+    JwtModule,
+    AuthenticationModule,
+    ServeStaticModule.forRoot({
+      rootPath: STATIC_ASSETS,
+      serveRoot: '/assets',
+      serveStaticOptions: {
+        cacheControl: true,
+      },
+    }),
+  ],
 })
 class AppModule implements NestModule {
   /**
