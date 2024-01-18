@@ -1,16 +1,13 @@
-name: Development Test
+name: Development Deployment
 
 on:
   push:
     branches:
       - main  
-      - development
+
 jobs:
-  build:
+  deployment:
     runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x]
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -21,6 +18,18 @@ jobs:
       - name: install package
         run: yarn install
       - name: run testing
-        run: yarn run test
+        run: yarn test
       - name: build code
-        run: yarn run dev
+        run: yarn build
+  docker_build:
+    runs-on: ubuntu-22.04
+    needs: deployment
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: Build Docker
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: dockerfiles/dev.dockerfile
+          push: false

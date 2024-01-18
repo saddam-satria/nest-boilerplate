@@ -7,9 +7,9 @@ COPY yarn*.lock ./
 
 RUN yarn install
 
-COPY src ./
+COPY src ./src
 
-COPY prisma ./
+COPY prisma ./prisma
 
 COPY tsconfig.json ./
 
@@ -21,8 +21,9 @@ COPY .eslintrc.js ./
 
 COPY .prettierrc ./
 
+RUN yarn prisma generate
+
 RUN yarn run build 
 
-EXPOSE 5000
 
 CMD [ "yarn", "run" ,"start" ]

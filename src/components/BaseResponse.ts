@@ -15,7 +15,7 @@ class BaseResponse {
   public static error<T>(
     statusCode: number,
     message: string,
-    data: T,
+    data: T = null,
   ): TBaseResponse<T> {
     return {
       data,
